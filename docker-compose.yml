@@ -1,0 +1,91 @@
+# Docker Compose 配置 - A股智能投研与预警 Agent
+# 中间件: MySQL + Redis + Qdrant
+
+services:
+  # ==================== FastAPI 应用 ====================
+  app:
+    build: .
+    container_name: quant-app
+    restart: unless-stopped
+    depends_on:
+      - mysql
+      - redis
+      - qdrant
+    env_file:
+      - .env
+    environment:
+      # 覆盖 .env 内的本地开发地址，使用容器服务名
+      MYSQL_HOST: mysql
+      REDIS_HOST: redis
+      QDRANT_HOST: qdrant
+    ports:
+      - "8090:8090"
+    networks:
+      - quant-network
+
+  # ==================== MySQL 8.0 ====================
+  mysql:
+    image: mysql:8.0
+    container_name: quant-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxyyyzzz!!!
+      MYSQL_DATABASE: agent_db
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - quant-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pxxxyyyzzz!!!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ==================== Redis 7.x ====================
+  redis:
+    image: redis:7-alpine
+    container_name: quant-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - quant-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ==================== Qdrant 向量数据库 ====================
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: quant-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"   # REST API
+      - "6334:6334"   # gRPC API
+    volumes:
+      - ./data/qdrant:/qdrant/storage
+    networks:
+      - quant-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 http://localhost:6333/collections || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+# ==================== 网络配置 ====================
+networks:
+  quant-network:
+    driver: bridge
+    name: quant-network

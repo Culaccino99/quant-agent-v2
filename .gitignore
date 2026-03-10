@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual env
+.venv/
+venv/
+
+# Environment & secrets
+.env
+.env.*
+
+# Local data
+data/
+
+# IDE / tooling
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Project docs (不推到公开仓库)
+project_plan.md
+project_interview.md
+

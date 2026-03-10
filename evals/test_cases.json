@@ -1,0 +1,202 @@
+[
+  {
+    "id": "TC001",
+    "category": "fundamental",
+    "query": "帮我看看精测电子的基本面",
+    "expected_tools": ["get_fundamental_data"],
+    "expected_args": {"stock_code": "300567"},
+    "description": "明确的基本面查询，应调用 get_fundamental_data"
+  },
+  {
+    "id": "TC002",
+    "category": "fundamental",
+    "query": "贵州茅台最新财报怎么样？市盈率多少？",
+    "expected_tools": ["get_fundamental_data"],
+    "expected_args": {"stock_code": "600519"},
+    "description": "财报+估值查询，应调用基本面工具"
+  },
+  {
+    "id": "TC003",
+    "category": "fundamental",
+    "query": "比亚迪和宁德时代哪个估值更合理？",
+    "expected_tools": ["get_fundamental_data"],
+    "expected_args": {},
+    "description": "两只股票对比，至少应调用一次基本面工具"
+  },
+  {
+    "id": "TC004",
+    "category": "news",
+    "query": "精测电子最近有什么新闻？",
+    "expected_tools": ["search_news_rag"],
+    "expected_args": {},
+    "description": "新闻查询，应调用 search_news_rag"
+  },
+  {
+    "id": "TC005",
+    "category": "news",
+    "query": "半导体板块最近有什么利好消息吗",
+    "expected_tools": ["search_news_rag"],
+    "expected_args": {},
+    "description": "板块新闻查询"
+  },
+  {
+    "id": "TC006",
+    "category": "composite",
+    "query": "帮我分析一下精测电子，从新闻和基本面两个角度",
+    "expected_tools": ["search_news_rag", "get_fundamental_data"],
+    "expected_args": {"stock_code": "300567"},
+    "description": "复合查询，应同时调用新闻和基本面工具"
+  },
+  {
+    "id": "TC007",
+    "category": "composite",
+    "query": "中芯国际今天涨了5个点，什么原因？基本面支撑吗？",
+    "expected_tools": ["search_news_rag", "get_fundamental_data"],
+    "expected_args": {},
+    "description": "异动归因，应先查新闻找原因，再查基本面验证"
+  },
+  {
+    "id": "TC008",
+    "category": "alert_create",
+    "query": "帮我设一个精测电子涨幅超过5%的预警",
+    "expected_tools": ["create_alert_rule"],
+    "expected_args": {"stock_code": "300567", "rule_type": "price_up", "threshold": 5},
+    "description": "创建涨幅预警，参数解析：stock_code、rule_type、threshold"
+  },
+  {
+    "id": "TC009",
+    "category": "alert_create",
+    "query": "监控贵州茅台，跌幅超3%通知我",
+    "expected_tools": ["create_alert_rule"],
+    "expected_args": {"stock_code": "600519", "rule_type": "price_down", "threshold": 3},
+    "description": "创建跌幅预警"
+  },
+  {
+    "id": "TC010",
+    "category": "alert_create",
+    "query": "帮我设一个宁德时代换手率超过8%的预警，冷却时间30分钟",
+    "expected_tools": ["create_alert_rule"],
+    "expected_args": {"stock_code": "300750", "rule_type": "turnover", "threshold": 8},
+    "description": "换手率预警 + 自定义冷却时间"
+  },
+  {
+    "id": "TC011",
+    "category": "alert_list",
+    "query": "我有哪些预警规则？",
+    "expected_tools": ["list_alert_rules"],
+    "expected_args": {},
+    "description": "查询预警列表"
+  },
+  {
+    "id": "TC012",
+    "category": "alert_list",
+    "query": "看看我的预警",
+    "expected_tools": ["list_alert_rules"],
+    "expected_args": {},
+    "description": "口语化查询预警列表"
+  },
+  {
+    "id": "TC013",
+    "category": "alert_delete",
+    "query": "删掉预警规则3",
+    "expected_tools": ["delete_alert_rule"],
+    "expected_args": {"rule_id": 3},
+    "description": "删除指定 ID 的规则"
+  },
+  {
+    "id": "TC014",
+    "category": "alert_toggle",
+    "query": "暂停规则2",
+    "expected_tools": ["toggle_alert_rule"],
+    "expected_args": {"rule_id": 2, "action": "pause"},
+    "description": "暂停预警规则"
+  },
+  {
+    "id": "TC015",
+    "category": "alert_toggle",
+    "query": "恢复规则1的监控",
+    "expected_tools": ["toggle_alert_rule"],
+    "expected_args": {"rule_id": 1, "action": "resume"},
+    "description": "恢复预警规则"
+  },
+  {
+    "id": "TC016",
+    "category": "doc_rag",
+    "query": "这份研报对半导体行业怎么看？",
+    "expected_tools": ["search_doc_rag"],
+    "expected_args": {},
+    "description": "文档 RAG 检索，涉及用户上传文档"
+  },
+  {
+    "id": "TC017",
+    "category": "doc_rag",
+    "query": "我上传的那份报告里提到了哪些风险因素？",
+    "expected_tools": ["search_doc_rag"],
+    "expected_args": {},
+    "description": "文档检索，明确提及用户上传文档"
+  },
+  {
+    "id": "TC018",
+    "category": "irrelevant",
+    "query": "今天天气怎么样",
+    "expected_tools": [],
+    "expected_args": {},
+    "description": "非投资相关闲聊，不应调用任何工具"
+  },
+  {
+    "id": "TC019",
+    "category": "irrelevant",
+    "query": "你好",
+    "expected_tools": [],
+    "expected_args": {},
+    "description": "简单打招呼，不应调用工具"
+  },
+  {
+    "id": "TC020",
+    "category": "irrelevant",
+    "query": "帮我写一段Python代码",
+    "expected_tools": [],
+    "expected_args": {},
+    "description": "编程问题，与投研无关"
+  },
+  {
+    "id": "TC021",
+    "category": "composite",
+    "query": "帮我全面分析一下五粮液000858",
+    "expected_tools": ["search_news_rag", "get_fundamental_data"],
+    "expected_args": {"stock_code": "000858"},
+    "description": "全面分析应同时调用新闻和基本面"
+  },
+  {
+    "id": "TC022",
+    "category": "alert_create",
+    "query": "如果比亚迪涨到300块通知我",
+    "expected_tools": ["create_alert_rule"],
+    "expected_args": {"stock_code": "002594", "rule_type": "price_up", "unit": "absolute"},
+    "description": "绝对价格预警，unit 应为 absolute"
+  },
+  {
+    "id": "TC023",
+    "category": "fundamental",
+    "query": "600519的PE是多少",
+    "expected_tools": ["get_fundamental_data"],
+    "expected_args": {"stock_code": "600519"},
+    "description": "直接用代码查询估值"
+  },
+  {
+    "id": "TC024",
+    "category": "composite",
+    "query": "AI概念股最近怎么样？有没有值得关注的？",
+    "expected_tools": ["search_news_rag"],
+    "expected_args": {},
+    "description": "板块级别的趋势查询，至少查新闻"
+  },
+  {
+    "id": "TC025",
+    "category": "alert_create",
+    "query": "帮我同时监控中芯国际和长电科技，涨幅超3%就通知我",
+    "expected_tools": ["create_alert_rule"],
+    "expected_args": {},
+    "description": "一次请求创建多条规则，考验 Agent 理解能力"
+  }
+]

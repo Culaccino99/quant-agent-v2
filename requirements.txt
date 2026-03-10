@@ -1,0 +1,45 @@
+# ============================================================
+# A股智能投研与预警 Agent - Python 依赖
+# 使用方式: pip install -r requirements.txt
+# ============================================================
+
+# ============ Web 框架 ============
+fastapi
+uvicorn[standard]
+httpx
+
+# ============ 数据库 & 缓存 ============
+sqlalchemy[asyncio]
+aiomysql
+redis[hiredis]
+
+# ============ 配置 & 日志 ============
+pydantic-settings
+loguru
+
+# ============ LangChain 核心 ============
+langchain
+langchain-core
+langchain-openai
+langgraph
+
+# ============ 数据获取 ============
+akshare
+efinance
+
+# ============ 向量数据库 & Embedding ============
+qdrant-client
+sentence-transformers
+
+# ============ 文档解析 ============
+pymupdf
+python-docx
+openpyxl
+
+# ============ 可观测 & 评测 ============
+langsmith
+
+# ============ 工具库 ============
+python-dotenv
+tenacity
+requests

@@ -1,0 +1,734 @@
+{
+  "summary": {
+    "total_cases": 25,
+    "errors": 7,
+    "tool_routing_accuracy": "18/18 (100.0%)",
+    "arg_parsing_accuracy": "18/18 (100.0%)",
+    "avg_quality_score": "2.24/5.0",
+    "avg_latency_s": 27.24,
+    "p95_latency_s": 56.57
+  },
+  "by_category": {
+    "alert_create": {
+      "total": 5,
+      "tool_pass": 0,
+      "arg_pass": 0,
+      "errors": 5,
+      "tool_accuracy": "0.0%"
+    },
+    "alert_delete": {
+      "total": 1,
+      "tool_pass": 1,
+      "arg_pass": 1,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "alert_list": {
+      "total": 2,
+      "tool_pass": 0,
+      "arg_pass": 0,
+      "errors": 2,
+      "tool_accuracy": "0.0%"
+    },
+    "alert_toggle": {
+      "total": 2,
+      "tool_pass": 2,
+      "arg_pass": 2,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "composite": {
+      "total": 4,
+      "tool_pass": 4,
+      "arg_pass": 4,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "doc_rag": {
+      "total": 2,
+      "tool_pass": 2,
+      "arg_pass": 2,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "fundamental": {
+      "total": 4,
+      "tool_pass": 4,
+      "arg_pass": 4,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "irrelevant": {
+      "total": 3,
+      "tool_pass": 3,
+      "arg_pass": 3,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    },
+    "news": {
+      "total": 2,
+      "tool_pass": 2,
+      "arg_pass": 2,
+      "errors": 0,
+      "tool_accuracy": "100.0%"
+    }
+  },
+  "details": [
+    {
+      "id": "TC001",
+      "category": "fundamental",
+      "query": "帮我看看精测电子的基本面",
+      "description": "明确的基本面查询，应调用 get_fundamental_data",
+      "expected_tools": [
+        "get_fundamental_data"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "stock_code": "300567"
+      },
+      "actual_args": {
+        "stock_code": "300567"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "stock_code": true
+      },
+      "final_answer": "基于获取的数据，为您分析精测电子的基本面情况：\n\n**【用户画像理解】**\n由于缺乏具体的用户画像信息，我将以平衡型投资者的视角进行分析，兼顾成长性与风险控制。\n\n**【基本面分析总结】**\n精测电子（300567）是一家专注于通用设备领域的上市公司，当前市值约392亿元，属于中等规模企业。\n\n**【数据与逻辑印证】**\n- **估值水平：** 最新股价140.01元，总市值391.67亿元，流通市值317.89亿元，流动性较好\n- **财务表现：** 2025年三季报显示每股收益0.36元，该数据反映了公司前三季度的盈利能力\n- **行业地位：** 属于通用设备行业，2016年11月上市，上市时间约9年\n\n**【策略研判】**\n从基本面数据看，公司具备一定的规模基础，但当前获取的财务数据较为有限（仅有三季报EPS数据）。建议进一步关注：\n1. 完整的年度财务报告，包括营收、净利润、毛利率等关键指标\n2. 公司在半导体检测设备等细分领域的市场地位和技术优势\n3. 行业景气度变化及政策支持情况\n\n**风险提示：** 通用设备行业周期性较强，需关注宏观经济波动对公司业绩的影响。当前数据不足",
+      "final_answer_length": 531,
+      "latency_s": 44.56,
+      "error": null
+    },
+    {
+      "id": "TC002",
+      "category": "fundamental",
+      "query": "贵州茅台最新财报怎么样？市盈率多少？",
+      "description": "财报+估值查询，应调用基本面工具",
+      "expected_tools": [
+        "get_fundamental_data"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "stock_code": "600519"
+      },
+      "actual_args": {
+        "stock_code": "600519"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "stock_code": true
+      },
+      "final_answer": "基于获取到的数据，我来为您分析贵州茅台的最新财报情况和估值：\n\n**【用户画像理解】**\n根据您的提问，您关注的是A股市场的核心价值标的，显示出对基本面分析和稳健投资风格的偏好。\n\n**【财报核心数据】**\n贵州茅台最新财报为2025年三季报，报告期截至2025年9月30日，于2025年10月30日发布。\n\n**【基本面与估值分析】**\n- **股价表现：** 最新价1397.0元，总市值约1.75万亿元，是A股市值最大的白酒企业\n- **财务指标：** 2025年三季报每股收益（EPS）为51.53元，显示出强劲的盈利能力\n- **估值水平：** 基于最新价1397元和每股收益51.53元计算，静态市盈率（PE）约为27.1倍\n\n**【策略研判】**\n贵州茅台作为白酒行业龙头，27倍左右的市盈率在当前市场环境下处于合理区间。考虑到其稳定的盈利能力和品牌护城河，对于追求稳健收益的投资者而言，茅台仍具备长期配置价值。建议关注后续年报业绩指引和分红政策。",
+      "final_answer_length": 431,
+      "latency_s": 30.02,
+      "error": null
+    },
+    {
+      "id": "TC003",
+      "category": "fundamental",
+      "query": "比亚迪和宁德时代哪个估值更合理？",
+      "description": "两只股票对比，至少应调用一次基本面工具",
+      "expected_tools": [
+        "get_fundamental_data"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "基于获取的基本面数据，我来为您分析比亚迪和宁德时代的估值对比：\n\n**【用户画像理解】**\n由于缺乏用户画像数据，我将按平衡型投资者视角进行分析，兼顾成长性和估值安全边际。\n\n**【估值对比分析】**\n\n**比亚迪（002594）：**\n- **当前股价：** 97.52元\n- **总市值：** 8891.09亿元\n- **2025年三季报EPS：** 2.56元\n- **推算年化EPS：** 约3.41元（按三季报年化）\n- **推算PE：** 约28.6倍（97.52 ÷ 3.41）\n\n**宁德时代（300750）：**\n- **当前股价：** 357.5元\n- **总市值：** 16315.83亿元\n- **2025年年报EPS：** 16.14元\n- **PE：** 约22.1倍（357.5 ÷ 16.14）\n\n**【基本面对比】**\n1. **行业地位：** 宁德时代是全球动力电池龙头，比亚迪是新能源汽车整车+电池一体化龙头\n2. **市值规模：** 宁德时代（1.63万亿）> 比亚迪（8891亿）\n3. **盈利能力：** 宁德时代EPS 16.14元显著高于比亚迪的2.5",
+      "final_answer_length": 813,
+      "latency_s": 49.59,
+      "error": null
+    },
+    {
+      "id": "TC004",
+      "category": "news",
+      "query": "精测电子最近有什么新闻？",
+      "description": "新闻查询，应调用 search_news_rag",
+      "expected_tools": [
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "基于当前可获取的信息，我为您总结如下：\n\n**关于精测电子（300567）的最新情况：**\n\n**新闻检索情况：**\n当前新闻数据库检索出现异常，返回的都是苯乙烯期货的信息，未能获取到精测电子的最新新闻动态。这可能意味着：\n1. 数据库暂时存在问题\n2. 精测电子近期确实没有重大新闻事件被收录\n\n**基本面概况：**\n- **最新股价：** 140.01元\n- **总市值：** 391.67亿元\n- **流通市值：** 317.89亿元\n- **最新财报：** 2025年三季报显示每股收益0.36元\n- **行业分类：** 通用设备\n- **上市时间：** 2016年11月22日\n\n**建议：**\n1. 您可以关注公司官方公告渠道获取最新信息\n2. 可以尝试查询券商研报或行业动态了解公司最新情况\n3. 如果您有特定的关注方向（如半导体检测设备、新能源业务等），我可以帮您进行更针对性的查询\n\n您是否还有其他关于精测电子的具体问题需要了解？",
+      "final_answer_length": 424,
+      "latency_s": 39.61,
+      "error": null
+    },
+    {
+      "id": "TC005",
+      "category": "news",
+      "query": "半导体板块最近有什么利好消息吗",
+      "description": "板块新闻查询",
+      "expected_tools": [
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "基于当前可获取的信息，我为您分析半导体板块的情况：\n\n**【用户画像理解】**\n由于缺乏具体的用户画像数据，我将以平衡型投资者的视角进行分析，兼顾成长性与风险控制。\n\n**【半导体板块现状分析】**\n\n**当前数据限制：**\n由于新闻数据库返回结果异常（均为苯乙烯期货信息），无法获取最新的半导体行业政策动态和利好消息。这可能是数据库更新或技术问题。\n\n**基本面参考：**\n从中芯国际（688981）的基本面数据来看：\n- 最新价：105.14元，总市值8412.65亿\n- 2025年三季报EPS为0.48元\n- 作为半导体制造龙头，其表现可部分反映行业整体状况\n\n**【行业观察要点】**\n\n**潜在关注方向：**\n1. **国产替代进程**：半导体自主可控仍是长期主线\n2. **AI芯片需求**：人工智能发展带动高端芯片需求\n3. **设备材料突破**：半导体设备与材料的国产化进展\n4. **政策支持预期**：国家对集成电路产业的持续扶持\n\n**【建议】**\n由于当前无法获取最新的行业新闻和政策动态，建议您：\n1. 关注官方渠道发布的半导体产业政策\n2. 跟踪主要半导体公司的财报和公告",
+      "final_answer_length": 587,
+      "latency_s": 39.25,
+      "error": null
+    },
+    {
+      "id": "TC006",
+      "category": "composite",
+      "query": "帮我分析一下精测电子，从新闻和基本面两个角度",
+      "description": "复合查询，应同时调用新闻和基本面工具",
+      "expected_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "stock_code": "300567"
+      },
+      "actual_args": {
+        "stock_code": "300567"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "stock_code": true
+      },
+      "final_answer": "**【用户画像理解】**\n基于当前对话，我判断您是一位关注科技成长股的投资者，对半导体产业链有研究兴趣，偏好基本面与技术面结合的分析方法。\n\n**【异动归因总结】**\n由于新闻检索系统暂时出现技术问题，无法获取精测电子的最新新闻动态，但可以从基本面角度进行分析。\n\n**【数据与逻辑印证】**\n- **事件催化：** 新闻检索系统当前返回异常结果（均为苯乙烯期货信息），无法获取精测电子的最新新闻、研报或市场舆情信息。\n- **基本面成色：** 精测电子当前股价140.01元，总市值391.67亿元，流通市值317.89亿元。2025年三季报显示每股收益0.36元，作为半导体检测设备领域的龙头企业，公司处于通用设备行业，2016年11月上市。\n\n**【策略研判】**\n鉴于无法获取最新新闻信息，建议您：1）关注公司即将发布的年报业绩预告；2）跟踪半导体设备国产化政策动向；3）注意当前估值水平与行业景气度的匹配度。作为半导体检测设备龙头，公司受益于国产替代趋势，但需关注下游晶圆厂资本开支变化对设备需求的影响。",
+      "final_answer_length": 457,
+      "latency_s": 30.07,
+      "error": null
+    },
+    {
+      "id": "TC007",
+      "category": "composite",
+      "query": "中芯国际今天涨了5个点，什么原因？基本面支撑吗？",
+      "description": "异动归因，应先查新闻找原因，再查基本面验证",
+      "expected_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "**【用户画像理解】**\n基于您的提问，我判断您对半导体龙头股有较高关注度，属于关注科技成长板块的投资者，可能偏向平衡型风格。\n\n**【异动归因总结】**\n当前新闻数据有限，未能直接获取中芯国际今日上涨5%的具体催化剂，但半导体板块整体可能受行业政策、技术突破或市场情绪推动。\n\n**【数据与逻辑印证】**\n- **事件催化：** 新闻检索未找到直接相关事件，建议关注半导体行业政策、国产替代进展或公司最新公告。\n- **基本面成色：** 中芯国际最新价105.14元，总市值8412.65亿，流通市值2102.34亿。2025年三季报EPS为0.48元，作为半导体制造龙头，估值相对较高但反映市场对其技术领先地位的认可。\n\n**【策略研判】**\n作为半导体行业龙头，中芯国际受益于国产替代长期趋势。今日5%涨幅需结合板块整体表现判断。建议关注后续是否有具体利好公告，同时注意半导体行业周期性波动风险。对于平衡型投资者，可考虑分批布局，避免追高。",
+      "final_answer_length": 423,
+      "latency_s": 28.37,
+      "error": null
+    },
+    {
+      "id": "TC008",
+      "category": "alert_create",
+      "query": "帮我设一个精测电子涨幅超过5%的预警",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC009",
+      "category": "alert_create",
+      "query": "监控贵州茅台，跌幅超3%通知我",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC010",
+      "category": "alert_create",
+      "query": "帮我设一个宁德时代换手率超过8%的预警，冷却时间30分钟",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC011",
+      "category": "alert_list",
+      "query": "我有哪些预警规则？",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC012",
+      "category": "alert_list",
+      "query": "看看我的预警",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC013",
+      "category": "alert_delete",
+      "query": "删掉预警规则3",
+      "description": "删除指定 ID 的规则",
+      "expected_tools": [
+        "delete_alert_rule"
+      ],
+      "actual_tools": [
+        "delete_alert_rule"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "rule_id": 3
+      },
+      "actual_args": {
+        "rule_id": 3
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "rule_id": true
+      },
+      "final_answer": "抱歉，删除预警规则时遇到了技术问题。由于系统限制，目前无法直接删除预警规则。\n\n您可以尝试以下替代方案：\n1. 使用\"暂停规则\"功能暂时停用该预警\n2. 联系技术支持人员协助处理\n3. 或者您可以告诉我该预警的具体内容，我可以帮您重新设置一个更合适的预警规则\n\n如果您想暂停规则3，我可以帮您操作。",
+      "final_answer_length": 149,
+      "latency_s": 9.83,
+      "error": null
+    },
+    {
+      "id": "TC014",
+      "category": "alert_toggle",
+      "query": "暂停规则2",
+      "description": "暂停预警规则",
+      "expected_tools": [
+        "toggle_alert_rule"
+      ],
+      "actual_tools": [
+        "toggle_alert_rule"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "rule_id": 2,
+        "action": "pause"
+      },
+      "actual_args": {
+        "rule_id": 2,
+        "action": "pause"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "rule_id": true,
+        "action": true
+      },
+      "final_answer": "抱歉，暂停预警规则的操作遇到了技术问题。目前无法执行暂停操作，可能是系统配置问题。\n\n您可以稍后再试，或者联系技术支持解决此问题。如果您需要查看当前的预警规则列表，我可以帮您查询。",
+      "final_answer_length": 90,
+      "latency_s": 7.94,
+      "error": null
+    },
+    {
+      "id": "TC015",
+      "category": "alert_toggle",
+      "query": "恢复规则1的监控",
+      "description": "恢复预警规则",
+      "expected_tools": [
+        "toggle_alert_rule"
+      ],
+      "actual_tools": [
+        "toggle_alert_rule"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "rule_id": 1,
+        "action": "resume"
+      },
+      "actual_args": {
+        "rule_id": 1,
+        "action": "resume"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "rule_id": true,
+        "action": true
+      },
+      "final_answer": "抱歉，恢复预警规则的操作遇到了技术问题。目前无法执行恢复操作，可能是系统配置问题。\n\n建议您：\n1. 稍后重试恢复操作\n2. 或者先查看一下当前的预警规则列表，确认规则1的状态\n\n您需要我先帮您查看一下当前的预警规则列表吗？",
+      "final_answer_length": 112,
+      "latency_s": 9.5,
+      "error": null
+    },
+    {
+      "id": "TC016",
+      "category": "doc_rag",
+      "query": "这份研报对半导体行业怎么看？",
+      "description": "文档 RAG 检索，涉及用户上传文档",
+      "expected_tools": [
+        "search_doc_rag"
+      ],
+      "actual_tools": [
+        "search_doc_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "根据您上传的《2026年A股景气投资指南》研报，我对半导体行业的观点总结如下：\n\n## 半导体行业2026年展望\n\n**核心观点：** 半导体行业在2026年将围绕**存储、AI、国产化**三大关键词展开，呈现结构性景气特征。\n\n### 主要趋势分析：\n\n1. **AI算力需求驱动**：2026年全球AI服务器出货量预计达450万台，占整体服务器出货量的30%。这直接推动了先进制程产能扩张，3纳米及以下制程产能连续四年保持40%以上年成长率。\n\n2. **先进制程资源集中**：先进制程资源高度集中于AI应用，对非AI应用的高阶芯片形成排挤效应，推升了整体供应链的成本与价格中枢。\n\n3. **端侧AI芯片受益**：2026年是AI终端创新元年，AI眼镜、AI Pin等新形态终端涌现，推动端云混合模式成为主流，端侧SoC（系统级芯片）产业链持续受益。\n\n4. **存储周期复苏**：研报明确提到\"存储\"是2026年半导体三大关键词之一，预计存储芯片市场将迎来周期性复苏。\n\n5. **国产化持续推进**：在外部环境不确定性背景下，半导体产业链的国产化替代进程将继续深化，为国内半导体企业带来结构",
+      "final_answer_length": 676,
+      "latency_s": 31.61,
+      "error": null
+    },
+    {
+      "id": "TC017",
+      "category": "doc_rag",
+      "query": "我上传的那份报告里提到了哪些风险因素？",
+      "description": "文档检索，明确提及用户上传文档",
+      "expected_tools": [
+        "search_doc_rag"
+      ],
+      "actual_tools": [
+        "search_doc_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "根据我检索到的文档内容，您上传的《2026年A股景气投资指南》报告中提到了以下主要风险因素：\n\n## 主要风险因素总结：\n\n1. **政策落地节奏风险**：报告明确指出\"2026年作为规划开局年，政策落地的节奏与效果将是市场波动的主要变量\"。这意味着\"十五五\"规划相关政策的实施进度和实际效果存在不确定性，可能影响市场表现。\n\n2. **全球宏观环境分化风险**：报告建议\"在顺周期与价值板块进行防御性配置，以应对全球宏观环境的分化与共振\"。这表明全球宏观经济环境可能出现分化，不同国家和地区的经济走势可能不一致，带来市场波动风险。\n\n3. **市场波动风险**：报告在操作策略部分特别强调需要注意政策落地节奏对市场波动的影响，暗示2026年市场可能面临较大的波动性。\n\n4. **结构性风险**：虽然报告整体对A股持乐观态度，但建议在不同板块间进行平衡配置，这隐含了不同行业和板块可能面临的结构性风险。\n\n**重要提示**：该报告是一份投资指南性质的文件，主要侧重于投资机会的挖掘和策略建议，而非专门的风险分析报告。因此，风险因素的讨论相对较少且较为宏观，主要集中在政策实施和宏观环境层面，缺乏对具",
+      "final_answer_length": 517,
+      "latency_s": 33.88,
+      "error": null
+    },
+    {
+      "id": "TC018",
+      "category": "irrelevant",
+      "query": "今天天气怎么样",
+      "description": "非投资相关闲聊，不应调用任何工具",
+      "expected_tools": [],
+      "actual_tools": [],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "我主要专注于A股市场的投研分析和预警管理，目前无法提供实时的天气信息查询服务。\n\n如果您有关于股票市场的问题，比如：\n- 某只股票的异动分析\n- 基本面数据查询\n- 市场新闻和研报检索\n- 预警规则设置和管理\n\n我很乐意为您提供专业的投研支持。您可以告诉我具体的股票代码或市场关注点，我来帮您深入分析。",
+      "final_answer_length": 151,
+      "latency_s": 6.31,
+      "error": null
+    },
+    {
+      "id": "TC019",
+      "category": "irrelevant",
+      "query": "你好",
+      "description": "简单打招呼，不应调用工具",
+      "expected_tools": [],
+      "actual_tools": [],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "你好！我是您的A股智能投研与预警决策大脑，很高兴为您服务！\n\n我可以为您提供以下专业支持：\n\n**📊 投研分析能力：**\n- 实时市场异动归因分析\n- 个股基本面与估值数据查询\n- 新闻舆情与研报信息检索\n- 结合您的投资偏好提供策略研判\n\n**🔔 预警管理功能：**\n- 创建股价涨跌、换手率等预警规则\n- 查看、暂停、恢复或删除现有预警\n- 个性化预警设置\n\n**📈 个性化服务：**\n我会根据您的投资偏好（风险承受能力、关注板块、交易风格等）来调整分析视角，为您提供更有针对性的建议。\n\n请告诉我您需要什么帮助？比如：\n1. 想了解某只股票的异动原因？\n2. 需要查询某公司的基本面数据？\n3. 想要设置股价预警？\n4. 查看您现有的预警规则？\n\n期待为您提供专业的投研支持！",
+      "final_answer_length": 341,
+      "latency_s": 11.65,
+      "error": null
+    },
+    {
+      "id": "TC020",
+      "category": "irrelevant",
+      "query": "帮我写一段Python代码",
+      "description": "编程问题，与投研无关",
+      "expected_tools": [],
+      "actual_tools": [],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "我主要专注于A股市场的投研分析和预警管理，包括股票基本面查询、新闻研报检索、预警规则设置等功能。\n\n对于编写Python代码的需求，我建议您可以：\n1. 明确您需要什么功能的Python代码（比如数据处理、网络爬虫、算法实现等）\n2. 如果您需要分析A股数据，我可以帮您查询具体的股票信息和市场动态\n3. 如果您想设置股票预警规则，我可以帮您创建相应的监控规则\n\n请告诉我您具体想用Python代码实现什么功能，或者您是否有其他与A股投资相关的问题需要帮助？",
+      "final_answer_length": 229,
+      "latency_s": 7.84,
+      "error": null
+    },
+    {
+      "id": "TC021",
+      "category": "composite",
+      "query": "帮我全面分析一下五粮液000858",
+      "description": "全面分析应同时调用新闻和基本面",
+      "expected_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_doc_rag",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "stock_code": "000858"
+      },
+      "actual_args": {
+        "stock_code": "000858"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "stock_code": true
+      },
+      "final_answer": "基于目前获取到的信息，我来为您提供五粮液的分析报告：\n\n**【用户画像理解】**\n由于缺乏具体的用户画像数据，我将按照平衡型投资者的视角进行分析，兼顾价值与成长性考量。\n\n**【异动归因总结】**\n当前未检测到明显异动，五粮液作为白酒龙头股，股价表现相对稳定，主要受白酒行业整体景气度和消费复苏预期影响。\n\n**【数据与逻辑印证】**\n- **基本面成色：** 五粮液当前股价101.52元，总市值3940.61亿元，流通市值3940.44亿元，属于白酒行业龙头。2025年三季报显示每股收益5.542元，盈利能力稳健。作为高端白酒代表，公司品牌价值突出，渠道网络完善。\n\n**【策略研判】**\n五粮液作为白酒行业双龙头之一，具有以下特点：\n1. **优势：** 品牌护城河深厚，高端产品线完整，现金流充裕，分红稳定\n2. **风险：** 受宏观经济和消费环境影响较大，白酒行业面临消费结构变化挑战\n3. **建议：** 适合长期价值投资者配置，可作为消费板块核心持仓。当前估值处于历史中位水平，建议关注春节旺季销售数据、消费政策变化以及公司产品结构升级进展。\n\n*注：由于新闻检索系统当前返回数据有",
+      "final_answer_length": 539,
+      "latency_s": 38.66,
+      "error": null
+    },
+    {
+      "id": "TC022",
+      "category": "alert_create",
+      "query": "如果比亚迪涨到300块通知我",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    },
+    {
+      "id": "TC023",
+      "category": "fundamental",
+      "query": "600519的PE是多少",
+      "description": "直接用代码查询估值",
+      "expected_tools": [
+        "get_fundamental_data"
+      ],
+      "actual_tools": [
+        "get_fundamental_data"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {
+        "stock_code": "600519"
+      },
+      "actual_args": {
+        "stock_code": "600519"
+      },
+      "arg_parsing_pass": true,
+      "arg_details": {
+        "stock_code": true
+      },
+      "final_answer": "从查询结果来看，贵州茅台（600519）的基本面数据中包含了最新价1397.0元、总市值17494.21亿、每股收益51.53元等信息，但市盈率（PE）数据没有直接显示。\n\n不过，我们可以通过计算来估算PE：\n- 最新价：1397.0元\n- 每股收益（EPS）：51.53元（2025年三季报数据）\n\n**静态市盈率 ≈ 1397.0 ÷ 51.53 ≈ 27.1倍**\n\n需要注意的是：\n1. 这是基于三季报数据的估算，年报数据可能会有变化\n2. 不同数据源对PE的计算方法可能略有差异\n3. 这个PE水平在白酒行业中属于相对合理的估值区间\n\n如果您需要更精确的动态市盈率（基于未来预期收益），建议查看券商研报中的预测数据。",
+      "final_answer_length": 313,
+      "latency_s": 15.06,
+      "error": null
+    },
+    {
+      "id": "TC024",
+      "category": "composite",
+      "query": "AI概念股最近怎么样？有没有值得关注的？",
+      "description": "板块级别的趋势查询，至少查新闻",
+      "expected_tools": [
+        "search_news_rag"
+      ],
+      "actual_tools": [
+        "get_fundamental_data",
+        "search_news_rag"
+      ],
+      "tool_routing_pass": true,
+      "expected_args": {},
+      "actual_args": {},
+      "arg_parsing_pass": true,
+      "arg_details": {},
+      "final_answer": "基于当前可获得的数据，我来为您分析AI概念股的情况：\n\n**【用户画像理解】**\n由于缺乏具体的用户画像数据，我将以平衡型投资者的视角进行分析，兼顾成长性与风险控制。\n\n**【AI概念股现状分析】**\n\n**当前市场特征：**\n从基本面数据看，AI概念股呈现分化格局：\n1. **科大讯飞（002230）**：最新价53.5元，总市值1237亿，2025三季报EPS为负值（-0.0288），显示公司仍处于投入期\n2. **海光信息（688041）**：最新价238.43元，总市值5542亿，2025三季报EPS 0.85元，作为国产CPU/DCU龙头业绩相对稳健\n3. **寒武纪（688256）**：最新价1125.99元，总市值4748亿，2025三季报EPS 3.85元，AI芯片概念股中业绩表现突出\n\n**【值得关注的方向】**\n\n**1. 算力基础设施（相对稳健）**\n- **海光信息**：国产算力核心标的，业绩有支撑，估值相对合理\n- **关注点**：国产替代逻辑、数据中心需求增长\n\n**2. AI芯片与算法（高弹性）**\n- **寒武纪**：AI芯片龙头，技术壁垒较高，但估值偏",
+      "final_answer_length": 805,
+      "latency_s": 56.57,
+      "error": null
+    },
+    {
+      "id": "TC025",
+      "category": "alert_create",
+      "query": "帮我同时监控中芯国际和长电科技，涨幅超3%就通知我",
+      "error": "未获取到当前用户身份，无法操作预警规则",
+      "pass": false
+    }
+  ],
+  "quality_scores": [
+    {
+      "relevance": 2,
+      "accuracy": 1,
+      "completeness": 1,
+      "actionability": 2,
+      "reason": "回答虽围绕基本面但核心财务数据（如营收、利润、增长、负债）和业务分析（半导体检测主业）严重缺失且存在关键事实错误（市值被夸大十倍以上），导致信息价值极低，仅建议部分略有可操作性。",
+      "avg_score": 1.5
+    },
+    {
+      "relevance": 5,
+      "accuracy": 1,
+      "completeness": 3,
+      "actionability": 4,
+      "reason": "回答高度切题且分析框架完整，但核心数据（财报年份、股价、市盈率）均为未来或虚构，存在严重事实错误。",
+      "avg_score": 3.25
+    },
+    {
+      "relevance": 3,
+      "accuracy": 2,
+      "completeness": 2,
+      "actionability": 2,
+      "reason": "回答切题但数据存在明显错误（如比亚迪2025年三季报EPS为捏造），分析框架不完整且未给出明确的估值合理性结论或可操作建议。",
+      "avg_score": 2.25
+    },
+    {
+      "relevance": 3,
+      "accuracy": 4,
+      "completeness": 2,
+      "actionability": 4,
+      "reason": "回答诚实说明了无法获取新闻，并提供了基础信息和替代建议，但未能直接满足用户对‘最近新闻’的核心需求。",
+      "avg_score": 3.25
+    },
+    {
+      "relevance": 3,
+      "accuracy": 4,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答承认无法获取最新利好消息导致切题性和完整性不足，但基于基本面的分析和建议框架准确且有一定操作性。",
+      "avg_score": 3.0
+    },
+    {
+      "relevance": 3,
+      "accuracy": 4,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答在准确性上表现尚可，但未能提供新闻分析，导致相关性和完整性不足，策略建议虽有一定可操作性但缺乏具体新闻支撑。",
+      "avg_score": 3.0
+    },
+    {
+      "relevance": 2,
+      "accuracy": 2,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答虽围绕主题但未提供今日上涨的具体原因，使用了虚构的2025年三季报数据，对用户关心的原因和基本面支撑覆盖不足，但策略建议部分具有一定可操作性。",
+      "avg_score": 2.25
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "relevance": 4,
+      "accuracy": 5,
+      "completeness": 4,
+      "actionability": 5,
+      "reason": "回答准确说明了无法删除的系统限制，并提供了清晰、可操作的替代方案，但未直接确认用户所指的‘规则3’是否存在或可被识别。",
+      "avg_score": 4.5
+    },
+    {
+      "relevance": 2,
+      "accuracy": 3,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答未直接解释“暂停规则2”的含义或操作，而是转向了技术故障，导致核心问题未被覆盖，但给出的故障处理建议本身具有可操作性且未捏造事实。",
+      "avg_score": 2.5
+    },
+    {
+      "relevance": 4,
+      "accuracy": 5,
+      "completeness": 3,
+      "actionability": 4,
+      "reason": "回答直接回应了用户请求并诚实说明了技术障碍，提供了替代建议，但未探讨问题根源或提供更进一步的解决路径。",
+      "avg_score": 4.0
+    },
+    {
+      "relevance": 5,
+      "accuracy": 4,
+      "completeness": 4,
+      "actionability": 3,
+      "reason": "回答紧密围绕研报内容，核心观点清晰，但部分数据未标注来源且缺乏具体投资建议。",
+      "avg_score": 4.0
+    },
+    {
+      "relevance": 5,
+      "accuracy": 5,
+      "completeness": 4,
+      "actionability": 3,
+      "reason": "回答精准切题且事实准确，完整概括了报告提及的主要宏观风险，但因其来源是投资指南，风险分析本身深度有限，故可操作性一般。",
+      "avg_score": 4.25
+    },
+    {
+      "relevance": 2,
+      "accuracy": 5,
+      "completeness": 1,
+      "actionability": 4,
+      "reason": "回答准确声明了自身能力边界，并提供了替代服务建议，但未直接回应天气查询这一核心问题，也未提供任何相关替代信息渠道。",
+      "avg_score": 3.0
+    },
+    {
+      "relevance": 2,
+      "accuracy": 5,
+      "completeness": 1,
+      "actionability": 1,
+      "reason": "回答内容本身准确且专业，但与简单的问候‘你好’高度不匹配，过度展开且未覆盖用户潜在意图，导致相关性和可操作性差。",
+      "avg_score": 2.25
+    },
+    {
+      "relevance": 2,
+      "accuracy": 5,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答准确描述了自身功能范围，但未直接回应代码编写请求，仅部分覆盖了用户潜在需求，并提供了有限的替代建议。",
+      "avg_score": 3.0
+    },
+    {
+      "relevance": 4,
+      "accuracy": 2,
+      "completeness": 2,
+      "actionability": 3,
+      "reason": "回答框架切题且结构清晰，但核心财务数据（如2025年三季报）存在明显事实错误，分析要点覆盖不全且因数据截断而未完成，策略建议部分对长期投资者有一定参考价值。",
+      "avg_score": 2.75
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    },
+    {
+      "relevance": 5,
+      "accuracy": 4,
+      "completeness": 4,
+      "actionability": 4,
+      "reason": "回答直接针对PE问题，通过计算给出明确估值并说明数据来源和局限性，提供了估算方法和后续建议，但未直接提供市场实时或官方PE数据，且基于三季报的静态PE估算在严格意义上可能不完全准确。",
+      "avg_score": 4.25
+    },
+    {
+      "relevance": 4,
+      "accuracy": 2,
+      "completeness": 3,
+      "actionability": 3,
+      "reason": "回答紧扣AI概念股主题并提供了具体分析，但使用了虚构的未来财报数据（2025三季报），且分析在列举个股后突然中断，完整性不足，不过其提供的分析框架和关注方向仍具一定参考价值。",
+      "avg_score": 3.0
+    },
+    {
+      "avg_score": 0,
+      "reason": "执行异常"
+    }
+  ]
+}
