@@ -78,11 +78,11 @@ services:
     networks:
       - quant-network
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 http://localhost:6333/collections || exit 1"]
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:6333/ || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 15s
 
 # ==================== 网络配置 ====================
 networks:
