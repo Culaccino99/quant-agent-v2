@@ -18,6 +18,10 @@ services:
       MYSQL_HOST: mysql
       REDIS_HOST: redis
       QDRANT_HOST: qdrant
+    volumes:
+      # 将宿主机的模型目录挂载到容器内，供 Embedding 使用
+      # 请在宿主机的 ./models/bge-m3 目录下放置离线下载好的 BGE-m3 模型文件
+      - ./models/bge-m3:/models/bge-m3
     ports:
       - "8090:8090"
     networks:

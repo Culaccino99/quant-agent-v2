@@ -133,6 +133,12 @@ async def _monitor_loop():
 
 async def _poll_and_check():
     """单次轮询：获取所有活跃规则 → 批量查行情 → 逐条比对"""
+    # 0. 时间窗口检查：仅在 09:15 - 15:00 之间推送预警（交易时段）
+    now = datetime.now()
+    h, m = now.hour, now.minute
+    if h < 9 or (h == 9 and m < 15) or h > 15 or (h == 15 and m > 0):
+        return
+
     # 1. 读取所有活跃规则
     async with async_session_factory() as session:
         stmt = (
@@ -159,7 +165,6 @@ async def _poll_and_check():
     logger.info("[AlertMonitor] 获取行情成功: {} 只股票", len(quotes))
 
     # 4. 逐条比对规则
-    now = datetime.now()
     for rule, user in rows:
         quote = quotes.get(rule.stock_code)
         if not quote:
