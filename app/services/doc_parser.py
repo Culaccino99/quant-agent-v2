@@ -5,6 +5,7 @@ import io
 from typing import List
 
 from loguru import logger
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 _CHUNK_SIZE = 500
 _CHUNK_OVERLAP = 80
@@ -87,18 +88,20 @@ def _parse_xlsx(content: bytes) -> str:
 
 
 def _split_text(text: str) -> List[str]:
-    """简单的滑动窗口切片"""
+    """
+    递归字符分块：
+    优先按段落/句子等自然边界切分，过长时再按窗口兜底。
+    """
     text = text.strip()
-    if len(text) <= _CHUNK_SIZE:
-        return [text]
+    if not text:
+        return []
 
-    chunks = []
-    start = 0
-    while start < len(text):
-        end = start + _CHUNK_SIZE
-        chunk = text[start:end].strip()
-        if chunk:
-            chunks.append(chunk)
-        start += _CHUNK_SIZE - _CHUNK_OVERLAP
-
-    return chunks
+    splitter = RecursiveCharacterTextSplitter(
+        # 从粗到细的分隔符：段落 -> 行 -> 句子 -> 逗号/空格
+        separators=["\n\n", "\n", "。", "！", "？", "；", "，", " "],
+        chunk_size=_CHUNK_SIZE,
+        chunk_overlap=_CHUNK_OVERLAP,
+    )
+    chunks = splitter.split_text(text)
+    # 去掉空白块
+    return [c.strip() for c in chunks if c.strip()]

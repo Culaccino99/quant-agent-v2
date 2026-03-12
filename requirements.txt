@@ -23,6 +23,7 @@ langchain
 langchain-core
 langchain-openai
 langgraph
+langchain-text-splitters
 
 # ============ 数据获取 ============
 akshare
