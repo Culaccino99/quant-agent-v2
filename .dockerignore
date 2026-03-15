@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+*.egg
+.eggs
+dist
+build
+venv
+.venv
+env
+.env.local
+.pytest_cache
+.coverage
+htmlcov
+.mypy_cache
+.ruff_cache
+
+# 敏感与本地配置（运行时用 env_file 注入）
+.env
+.env.*
+!.env.example
+
+# 数据与模型（运行时挂载，不打进镜像）
+data/
+models/
+
+# 脚本与文档（镜像内不运行）
+scripts/
+*.md
+docs/
+project_interview.md
+
+# IDE / 工具
+.cursor
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# 评测产出（非构建依赖）
+evals/report.json
