@@ -45,3 +45,5 @@ langsmith
 python-dotenv
 tenacity
 requests
+jieba
+rank_bm25
