@@ -134,7 +134,9 @@ async def _monitor_loop():
 async def _poll_and_check():
     """单次轮询：获取所有活跃规则 → 批量查行情 → 逐条比对"""
     # 0. 时间窗口检查：仅在 09:15 - 15:00 之间推送预警（交易时段）
-    now = datetime.now()
+    # 容器内时间和服务器时间不同步 设置时区
+    from zoneinfo import ZoneInfo
+    now = datetime.now(ZoneInfo("Asia/Shanghai"))
     h, m = now.hour, now.minute
     if h < 9 or (h == 9 and m < 15) or h > 15 or (h == 15 and m > 0):
         return
