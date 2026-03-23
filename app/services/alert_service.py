@@ -7,6 +7,7 @@ import time
 import traceback
 from datetime import datetime, timedelta
 from typing import Any, Optional
+from zoneinfo import ZoneInfo
 
 from loguru import logger
 from sqlalchemy import select, update
@@ -14,6 +15,17 @@ from sqlalchemy import select, update
 from app.config import settings
 from app.models.database import async_session_factory
 from app.models.schemas import AlertHistory, AlertRule, User
+
+# 预警时间窗口与冷却比较统一用上海时区；DB 中 DATETIME 为 naive，按上海本地时刻解释
+SHANGHAI_TZ = ZoneInfo("Asia/Shanghai")
+
+
+def _datetime_as_shanghai(dt: datetime) -> datetime:
+    """将 naive 或任意 tz-aware 时间转为 Asia/Shanghai，便于与 now 比较。"""
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=SHANGHAI_TZ)
+    return dt.astimezone(SHANGHAI_TZ)
+
 
 # ============================================================
 # CRUD
@@ -134,9 +146,7 @@ async def _monitor_loop():
 async def _poll_and_check():
     """单次轮询：获取所有活跃规则 → 批量查行情 → 逐条比对"""
     # 0. 时间窗口检查：仅在 09:15 - 15:00 之间推送预警（交易时段）
-    # 容器内时间和服务器时间不同步 设置时区
-    from zoneinfo import ZoneInfo
-    now = datetime.now(ZoneInfo("Asia/Shanghai"))
+    now = datetime.now(SHANGHAI_TZ)
     h, m = now.hour, now.minute
     if h < 9 or (h == 9 and m < 15) or h > 15 or (h == 15 and m > 0):
         return
@@ -172,9 +182,11 @@ async def _poll_and_check():
         if not quote:
             continue
 
-        # 冷却检查
+        # 冷却检查（now 为 tz-aware，last_triggered_at 从 DB 读出多为 naive，需统一时区）
         if rule.last_triggered_at:
-            cooldown_end = rule.last_triggered_at + timedelta(minutes=rule.cooldown_minutes)
+            cooldown_end = _datetime_as_shanghai(rule.last_triggered_at) + timedelta(
+                minutes=rule.cooldown_minutes
+            )
             if now < cooldown_end:
                 continue
 
@@ -293,7 +305,10 @@ async def _on_rule_triggered(
 
     try:
         # 1. 更新规则的最后触发时间
-        await update_rule(rule.id, last_triggered_at=datetime.now())
+        await update_rule(
+            rule.id,
+            last_triggered_at=datetime.now(SHANGHAI_TZ).replace(tzinfo=None),
+        )
         logger.info("[AlertTrigger] Step1 触发时间已更新")
 
         # 2. 构造 Agent 查询
