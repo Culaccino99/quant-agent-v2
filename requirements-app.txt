@@ -1,0 +1,21 @@
+# 应用与其它依赖：变更较频繁，Docker 中在 requirements-base.txt 之后安装
+
+fastapi
+uvicorn[standard]
+httpx
+sqlalchemy[asyncio]
+aiomysql
+cryptography
+redis[hiredis]
+pydantic-settings
+loguru
+qdrant-client>=1.11
+pymupdf
+python-docx
+openpyxl
+langsmith
+python-dotenv
+tenacity
+requests
+jieba
+rank_bm25

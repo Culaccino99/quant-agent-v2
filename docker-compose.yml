@@ -3,6 +3,7 @@
 
 services:
   # ==================== FastAPI 应用 ====================
+  # 构建加速：需 Docker BuildKit（docker compose v2 默认开启）；pip/apt 见 Dockerfile 缓存挂载
   app:
     build: .
     container_name: quant-app

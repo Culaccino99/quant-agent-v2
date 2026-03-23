@@ -1,0 +1,11 @@
+# 重依赖（PyTorch / LangChain / 行情库）：单独一层，少改动以复用 Docker 构建缓存
+# Docker 中先于 requirements-app.txt 安装；本地请用 pip install -r requirements.txt
+
+sentence-transformers
+akshare
+efinance
+langchain
+langchain-core
+langchain-openai
+langgraph
+langchain-text-splitters
